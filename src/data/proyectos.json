@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "titulo": "Sistema de Gestión Académica",
+    "descripcion": "Aplicación web completa para administración de notas y alumnos con React y Node.js.",
+    "tecnologias": ["React", "Bootstrap", "Node.js", "Express"],
+    "imagen": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=500",
+    "link": "https://github.com/pedrohacker20"
+  },
+  {
+    "id": 2,
+    "titulo": "App de Monitoreo IoT",
+    "descripcion": "Dashboard responsivo para visualización de métricas en tiempo real.",
+    "tecnologias": ["React", "Bootstrap", "Chart.js"],
+    "imagen": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500",
+    "link": "https://github.com/pedrohacker20"
+  },
+  {
+    "id": 3,
+    "titulo": "Portafolio Personal FullStack",
+    "descripcion": "Sitio web interactivo con pruebas unitarias integradas con Karma y Jasmine.",
+    "tecnologias": ["React", "Bootstrap", "Jasmine", "Karma"],
+    "imagen": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500",
+    "link": "https://github.com/pedrohacker20"
+  }
+]

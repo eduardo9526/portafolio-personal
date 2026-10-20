@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "titulo": "Certificación en Frontend JS Completada",
+    "fecha": "15 de Octubre, 2026",
+    "contenido": "He finalizado con éxito el módulo avanzado de desarrollo React y pruebas unitarias con Karma y Jasmine."
+  },
+  {
+    "id": 2,
+    "titulo": "Participación en Hackathon Duoc UC",
+    "fecha": "02 de Octubre, 2026",
+    "contenido": "Presentamos una solución de software responsivo orientada a la accesibilidad e integración continua."
+  }
+]
