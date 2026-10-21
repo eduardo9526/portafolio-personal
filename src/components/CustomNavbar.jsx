@@ -1,21 +1,30 @@
-import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuthSession, logoutUser } from '../utils/localStorage';
 
-export function CustomNavbar() {
+export const CustomNavbar = () => {
+  const navigate = useNavigate();
+  const user = getAuthSession();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate('/login');
+  };
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-      <Container>
-        <Navbar.Brand href="#introduccion">Mi Portafolio</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link href="#introduccion">Introducción</Nav.Link>
-            <Nav.Link href="#proyectos">Proyectos</Nav.Link>
-            <Nav.Link href="#noticias">Noticias</Nav.Link>
-            <Nav.Link href="#contacto">Contacto</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <nav style={{ padding: '1rem', background: '#333', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <h2><Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Mi Blog / Portafolio</Link></h2>
+      <div>
+        <Link to="/" style={{ margin: '0 10px', color: '#fff' }}>Inicio</Link>
+        {user ? (
+          <>
+            <Link to="/crear-noticia" style={{ margin: '0 10px', color: '#fff' }}>Crear Noticia</Link>
+            <span style={{ margin: '0 10px', color: '#28a745' }}>Hola, {user.username}</span>
+            <button onClick={handleLogout} style={{ padding: '5px 10px', cursor: 'pointer' }}>Cerrar Sesión</button>
+          </>
+        ) : (
+          <Link to="/login" style={{ margin: '0 10px', color: '#fff' }}>Iniciar Sesión</Link>
+        )}
+      </div>
+    </nav>
   );
-}
+};
