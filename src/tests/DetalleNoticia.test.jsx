@@ -1,6 +1,5 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach } from "vitest";
-
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import DetalleNoticia from "../pages/DetalleNoticia";
@@ -20,7 +19,7 @@ describe("Pruebas Unitarias - Componente DetalleNoticia", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/el artículo solicitado no existe/i)).toBeInTheDocument();
+    expect(screen.getByText(/artículo no encontrado/i)).toBeInTheDocument();
   });
 
   it("9. Muestra el título y el contenido de la noticia cuando el ID es válido", () => {
@@ -37,7 +36,7 @@ describe("Pruebas Unitarias - Componente DetalleNoticia", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("Noticia de Prueba")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Noticia de Prueba" })).toBeInTheDocument();
     expect(screen.getByText("Contenido detallado de prueba")).toBeInTheDocument();
   });
 
