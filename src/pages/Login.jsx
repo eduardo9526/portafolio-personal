@@ -1,48 +1,57 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../utils/localStorage';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../utils/localStorage";
 
-export const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+function Login() {
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username && password) {
-      loginUser({ username });
-      navigate('/');
+    if (usuario === "admin" && password === "1234") {
+      loginUser({ usuario });
+      sessionStorage.setItem("usuario", usuario);
+      navigate("/admin");
+    } else {
+      alert("Usuario o contraseña incorrectos");
     }
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '400px', margin: '2rem auto', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Usuario:</label>
-          <input 
-            type="text" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }} 
-            required 
-          />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-4">
+          <h3 className="text-center mb-4">Iniciar Sesión</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Usuario</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ingresa tu usuario"
+                value={usuario}
+                onChange={(e) => setUsuario(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Contraseña</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Ingresa tu contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">
+              Ingresar
+            </button>
+          </form>
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Contraseña:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }} 
-            required 
-          />
-        </div>
-        <button type="submit" style={{ width: '100%', padding: '10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Ingresar
-        </button>
-      </form>
+      </div>
     </div>
   );
-};
+}
+
+export default Login;
