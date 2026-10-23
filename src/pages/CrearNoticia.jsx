@@ -1,54 +1,68 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { savePost, getAuthSession } from '../utils/localStorage';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { savePost } from "../utils/localStorage";
 
-export const CrearNoticia = () => {
-  const [titulo, setTitulo] = useState('');
-  const [contenido, setContenido] = useState('');
+function CrearNoticia() {
+  const [titulo, setTitulo] = useState("");
+  const [contenido, setContenido] = useState("");
+  const [categoria, setCategoria] = useState("Tecnología");
   const navigate = useNavigate();
-  const user = getAuthSession();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPost = {
-      id: Date.now().toString(),
+    const nuevaNoticia = {
+      id: Date.now(),
       titulo,
       contenido,
-      autor: user?.username || 'Admin',
-      fecha: new Date().toISOString().split('T')[0]
+      categoria,
+      fecha: new Date().toLocaleDateString()
     };
-    savePost(newPost);
-    navigate('/');
+    savePost(nuevaNoticia);
+    navigate("/admin");
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
-      <h2>Crear Nueva Noticia / Post</h2>
+    <div className="container mt-4">
+      <h2>Crear Nueva Noticia</h2>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Título:</label>
-          <input 
-            type="text" 
-            value={titulo} 
-            onChange={(e) => setTitulo(e.target.value)} 
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }} 
-            required 
+        <div className="mb-3">
+          <label className="form-label">Título</label>
+          <input
+            type="text"
+            className="form-control"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            required
           />
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Contenido:</label>
-          <textarea 
-            value={contenido} 
-            onChange={(e) => setContenido(e.target.value)} 
-            rows="6" 
-            style={{ width: '100%', padding: '8px', marginTop: '4px' }} 
-            required 
+        <div className="mb-3">
+          <label className="form-label">Categoría</label>
+          <select
+            className="form-select"
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+          >
+            <option value="Tecnología">Tecnología</option>
+            <option value="Deportes">Deportes</option>
+            <option value="Cultura">Cultura</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Contenido</label>
+          <textarea
+            className="form-control"
+            rows="5"
+            value={contenido}
+            onChange={(e) => setContenido(e.target.value)}
+            required
           />
         </div>
-        <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          Publicar Noticia
+        <button type="submit" className="btn btn-success">
+          Guardar Noticia
         </button>
       </form>
     </div>
   );
-};
+}
+
+export default CrearNoticia;

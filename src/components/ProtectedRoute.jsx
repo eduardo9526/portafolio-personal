@@ -1,10 +1,13 @@
-import { Navigate } from 'react-router-dom';
-import { getAuthSession } from '../utils/localStorage';
+import { Navigate } from "react-router-dom";
 
-export const ProtectedRoute = ({ children }) => {
-  const user = getAuthSession();
-  if (!user) {
+function ProtectedRoute({ children }) {
+  const usuario = sessionStorage.getItem("usuario");
+
+  if (!usuario) {
     return <Navigate to="/login" replace />;
   }
+
   return children;
-};
+}
+
+export default ProtectedRoute;

@@ -1,9 +1,9 @@
 import { Introduccion } from '../components/Introduccion';
 import { Noticias } from '../components/Noticias';
 import { Proyectos } from '../components/Proyectos';
-import { Contacto } from '../components/Contacto';
+import Contacto from '../components/Contacto'; // Sin llaves
 
-export const Inicio = () => {
+function Inicio() {
   return (
     <main style={{ padding: '1rem' }}>
       <Introduccion />
@@ -12,4 +12,6 @@ export const Inicio = () => {
       <Contacto />
     </main>
   );
-};
+}
+
+export default Inicio; // Exportación por defecto
