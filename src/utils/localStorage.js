@@ -34,3 +34,11 @@ export const deletePost = (id) => {
   localStorage.setItem(POSTS_KEY, JSON.stringify(updatedPosts));
   return updatedPosts;
 };
+
+// --- Alias de compatibilidad para componentes y pruebas ---
+export const obtenerNoticias = getPosts;
+
+export const guardarNoticias = (noticias) => {
+  localStorage.setItem(POSTS_KEY, JSON.stringify(noticias));
+  return noticias;
+};

@@ -1,79 +1,59 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import { useState } from "react";
 
-export function Contacto() {
-  const [formData, setFormData] = useState({ nombre: '', email: '', mensaje: '' });
-  const [enviado, setEnviado] = useState(false);
+function Contacto() {
+  const [form, setForm] = useState({ nombre: "", correo: "", mensaje: "" });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.nombre && formData.email && formData.mensaje) {
-      setEnviado(true);
-      setFormData({ nombre: '', email: '', mensaje: '' });
-    }
+    alert("Mensaje enviado con éxito");
   };
 
   return (
-    <section id="contacto" className="py-5 bg-light">
-      <Container>
-        <h2 className="text-center mb-5 fw-bold">Contacto</h2>
-        <Row className="justify-content-center">
-          <Col md={8} lg={6}>
-            {enviado && (
-              <Alert variant="success" onClose={() => setEnviado(false)} dismissible>
-                ¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.
-              </Alert>
-            )}
-            <Form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-sm">
-              <Form.Group className="mb-3" controlId="formNombre">
-                <Form.Label>Nombre Completo</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Tu nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formEmail">
-                <Form.Label>Correo Electrónico</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="nombre@ejemplo.com"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formMensaje">
-                <Form.Label>Mensaje</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={4}
-                  placeholder="Escribe tu mensaje..."
-                  name="mensaje"
-                  value={formData.mensaje}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit" className="w-100">
-                Enviar Mensaje <i className="bi bi-send ms-1"></i>
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+    <div className="container mt-4">
+      <h2>Contacto</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Nombre</label>
+          <input
+            type="text"
+            name="nombre"
+            className="form-control"
+            placeholder="Tu nombre"
+            value={form.nombre}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Correo</label>
+          <input
+            type="email"
+            name="correo"
+            className="form-control"
+            placeholder="Tu correo"
+            value={form.correo}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Mensaje</label>
+          <textarea
+            name="mensaje"
+            className="form-control"
+            placeholder="Tu mensaje"
+            value={form.mensaje}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Enviar
+        </button>
+      </form>
+    </div>
   );
 }
+
+export default Contacto;
