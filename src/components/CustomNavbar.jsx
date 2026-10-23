@@ -1,30 +1,57 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { getAuthSession, logoutUser } from '../utils/localStorage';
+import { Link, useNavigate } from "react-router-dom";
 
-export const CustomNavbar = () => {
+function CustomNavbar() {
   const navigate = useNavigate();
-  const user = getAuthSession();
+  const usuario = sessionStorage.getItem("usuario");
 
   const handleLogout = () => {
-    logoutUser();
-    navigate('/login');
+    sessionStorage.removeItem("usuario");
+    navigate("/");
   };
 
   return (
-    <nav style={{ padding: '1rem', background: '#333', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <h2><Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Mi Blog / Portafolio</Link></h2>
-      <div>
-        <Link to="/" style={{ margin: '0 10px', color: '#fff' }}>Inicio</Link>
-        {user ? (
-          <>
-            <Link to="/crear-noticia" style={{ margin: '0 10px', color: '#fff' }}>Crear Noticia</Link>
-            <span style={{ margin: '0 10px', color: '#28a745' }}>Hola, {user.username}</span>
-            <button onClick={handleLogout} style={{ padding: '5px 10px', cursor: 'pointer' }}>Cerrar Sesión</button>
-          </>
-        ) : (
-          <Link to="/login" style={{ margin: '0 10px', color: '#fff' }}>Iniciar Sesión</Link>
-        )}
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <Link className="navbar-brand" to="/">Mi Blog / Portafolio</Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Inicio</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/categorias">Categorías</Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
+            {usuario ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link text-warning" to="/admin">Dashboard</Link>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-outline-light ms-2" onClick={handleLogout}>
+                    Cerrar Sesión
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <Link className="btn btn-primary" to="/login">Iniciar Sesión</Link>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     </nav>
   );
-};
+}
+
+export default CustomNavbar;
