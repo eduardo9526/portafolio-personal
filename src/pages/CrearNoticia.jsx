@@ -10,13 +10,16 @@ function CrearNoticia() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const nuevaNoticia = {
       id: Date.now(),
       titulo,
       contenido,
       categoria,
-      fecha: new Date().toLocaleDateString()
+      fecha: new Date().toLocaleDateString("es-ES")
     };
+
+    console.log("📝 [Formulario Noticia] Creando publicación:", nuevaNoticia);
     savePost(nuevaNoticia);
     navigate("/admin");
   };

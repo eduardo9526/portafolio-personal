@@ -10,7 +10,8 @@ function Contacto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    console.log("📤 [Formulario Contacto] Enviando datos:", form);
+
     const nuevoMensaje = {
       id: Date.now(),
       ...form,
@@ -18,7 +19,6 @@ function Contacto() {
     };
 
     guardarMensaje(nuevoMensaje);
-
     alert("¡Mensaje enviado con éxito!");
     setForm({ nombre: "", correo: "", mensaje: "" });
   };
