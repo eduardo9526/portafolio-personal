@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { guardarMensaje } from "../utils/localStorage";
 
 function Contacto() {
   const [form, setForm] = useState({ nombre: "", correo: "", mensaje: "" });
@@ -9,7 +10,17 @@ function Contacto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Mensaje enviado con éxito");
+    
+    const nuevoMensaje = {
+      id: Date.now(),
+      ...form,
+      fecha: new Date().toLocaleDateString("es-ES")
+    };
+
+    guardarMensaje(nuevoMensaje);
+
+    alert("¡Mensaje enviado con éxito!");
+    setForm({ nombre: "", correo: "", mensaje: "" });
   };
 
   return (
@@ -25,6 +36,7 @@ function Contacto() {
             placeholder="Tu nombre"
             value={form.nombre}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
@@ -36,6 +48,7 @@ function Contacto() {
             placeholder="Tu correo"
             value={form.correo}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
@@ -46,6 +59,7 @@ function Contacto() {
             placeholder="Tu mensaje"
             value={form.mensaje}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">

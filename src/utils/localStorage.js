@@ -1,5 +1,6 @@
 const POSTS_KEY = 'blog_posts';
 const AUTH_KEY = 'blog_auth_user';
+const MESSAGES_KEY = 'mensajes_contacto';
 
 // --- Gestión de Autenticación / Sesión ---
 export const getAuthSession = () => {
@@ -33,6 +34,23 @@ export const deletePost = (id) => {
   const updatedPosts = posts.filter(post => post.id !== id);
   localStorage.setItem(POSTS_KEY, JSON.stringify(updatedPosts));
   return updatedPosts;
+};
+
+// --- Gestión de Mensajes de Contacto ---
+export const obtenerMensajes = () => {
+  const msgs = localStorage.getItem(MESSAGES_KEY);
+  return msgs ? JSON.parse(msgs) : [];
+};
+
+export const guardarMensajes = (mensajes) => {
+  localStorage.setItem(MESSAGES_KEY, JSON.stringify(mensajes));
+  return mensajes;
+};
+
+export const guardarMensaje = (nuevoMensaje) => {
+  const mensajes = obtenerMensajes();
+  const actualizados = [nuevoMensaje, ...mensajes];
+  return guardarMensajes(actualizados);
 };
 
 // --- Alias de compatibilidad para componentes y pruebas ---
