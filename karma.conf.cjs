@@ -1,27 +1,22 @@
 module.exports = function (config) {
   config.set({
-    basePath: '',
-    frameworks: ['vite', 'jasmine'],
-    files: [
-      { pattern: 'src/**/*.spec.{js,jsx}', type: 'module', watched: false }
-    ],
-    plugins: [
-      require('karma-vite'),
-      require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-coverage')
-    ],
-    reporters: ['progress', 'coverage'],
-    coverageReporter: {
-      type: 'html',
-      dir: 'coverage/'
+    frameworks: ['jasmine'],
+    files: ['src/tests/**/*.spec.jsx'],
+    preprocessors: {
+      'src/tests/**/*.spec.jsx': ['esbuild']
     },
-    port: 9876,
-    colors: true,
-    logLevel: config.LOG_INFO,
-    autoWatch: false,
+    plugins: [
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-esbuild'
+    ],
+    esbuild: {
+      jsx: 'automatic',
+      define: { 'process.env.NODE_ENV': '"test"' }
+    },
+    reporters: ['progress'],
     browsers: ['ChromeHeadless'],
     singleRun: true,
-    restartOnFileChange: false
+    autoWatch: false
   });
 };
