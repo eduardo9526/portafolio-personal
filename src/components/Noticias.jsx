@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import noticiasData from '../data/noticias.json';
 
-export function Noticias() {
+// PROPS: titulo (título de la sección), limite (máximo de noticias a mostrar)
+export function Noticias({ titulo = 'Últimas Noticias', limite = noticiasData.length }) {
   const [noticias, setNoticias] = useState([]);
 
   useEffect(() => {
-    setNoticias(noticiasData);
-  }, []);
+    setNoticias(noticiasData.slice(0, limite));
+  }, [limite]);
 
   return (
     <section id="noticias" className="py-5">
       <Container>
-        <h2 className="text-center mb-5 fw-bold">Últimas Noticias</h2>
+        <h2 className="text-center mb-5 fw-bold">{titulo}</h2>
         <Row className="justify-content-center">
           <Col md={10}>
             {noticias.map((noticia) => (

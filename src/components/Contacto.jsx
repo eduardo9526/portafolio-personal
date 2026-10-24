@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { guardarMensaje } from "../utils/localStorage";
 
-function Contacto() {
+// PROPS: titulo (encabezado del formulario), textoBoton (texto del botón de envío)
+function Contacto({ titulo = "Contacto", textoBoton = "Enviar" }) {
+  console.log("🧩 [Contacto] props:", { titulo, textoBoton }); // <-- LÍNEA NUEVA
+
   const [form, setForm] = useState({ nombre: "", correo: "", mensaje: "" });
 
   const handleChange = (e) => {
@@ -24,8 +27,8 @@ function Contacto() {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Contacto</h2>
+    <div className="container mt-4" id="contacto">
+      <h2>{titulo}</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Nombre</label>
@@ -63,7 +66,7 @@ function Contacto() {
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Enviar
+          {textoBoton}
         </button>
       </form>
     </div>

@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 
-function CustomNavbar() {
+// PROP: nombreSitio (texto de la marca en la barra de navegación)
+function CustomNavbar({ nombreSitio = "Mi Blog / Portafolio" }) {
+  console.log("🧩 [CustomNavbar] props:", { nombreSitio });
+
   const navigate = useNavigate();
   const usuario = sessionStorage.getItem("usuario");
 
@@ -12,7 +15,7 @@ function CustomNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <Link className="navbar-brand" to="/">Mi Blog / Portafolio</Link>
+        <Link className="navbar-brand" to="/">{nombreSitio}</Link>
         <button
           className="navbar-toggler"
           type="button"

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
 import proyectosData from '../data/proyectos.json';
 
-export function Proyectos() {
+// PROPS: titulo (título de la sección), colorBadge (color de las etiquetas de tecnologías)
+export function Proyectos({ titulo = 'Mis Proyectos', colorBadge = 'secondary' }) {
   const [proyectos, setProyectos] = useState([]);
 
   useEffect(() => {
@@ -13,7 +14,7 @@ export function Proyectos() {
   return (
     <section id="proyectos" className="py-5 bg-light">
       <Container>
-        <h2 className="text-center mb-5 fw-bold">Mis Proyectos</h2>
+        <h2 className="text-center mb-5 fw-bold">{titulo}</h2>
         <Row className="g-4">
           {proyectos.map((proyecto) => (
             <Col key={proyecto.id} md={4}>
@@ -31,7 +32,7 @@ export function Proyectos() {
                   </Card.Text>
                   <div className="mb-3">
                     {proyecto.tecnologias.map((tech, index) => (
-                      <Badge bg="secondary" className="me-1 mb-1" key={index}>
+                      <Badge bg={colorBadge} className="me-1 mb-1" key={index}>
                         {tech}
                       </Badge>
                     ))}
