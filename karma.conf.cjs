@@ -1,9 +1,9 @@
 module.exports = function (config) {
   config.set({
     frameworks: ['jasmine'],
-    files: ['src/tests/**/*.spec.jsx'],
+    files: ['src/tests/index.spec.js'],
     preprocessors: {
-      'src/tests/**/*.spec.jsx': ['esbuild']
+      'src/tests/index.spec.js': ['esbuild']
     },
     plugins: [
       'karma-jasmine',
