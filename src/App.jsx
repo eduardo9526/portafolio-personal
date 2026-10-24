@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import CustomNavbar from './components/CustomNavbar';
 import Footer from './components/Footer';
 import Inicio from './pages/Inicio';
@@ -11,7 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-    <>
+    <Router>
       <CustomNavbar nombreSitio="Portafolio de Pedro" />
       <Routes>
         <Route path="/" element={<Inicio />} />
@@ -36,7 +36,7 @@ function App() {
         />
       </Routes>
       <Footer nombre="Pedro" github="https://github.com/pedrohacker20" />
-    </>
+    </Router>
   );
 }
 
