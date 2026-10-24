@@ -1,15 +1,15 @@
 module.exports = function (config) {
   config.set({
-    frameworks: ['jasmine', 'vite'],
+    basePath: '',
+    frameworks: ['vite', 'jasmine'],
     files: [
-      { pattern: 'src/**/*.spec.jsx', type: 'module' },
-      { pattern: 'src/**/*.spec.js', type: 'module' }
+      { pattern: 'src/**/*.spec.{js,jsx}', type: 'module', watched: false }
     ],
     plugins: [
-      'karma-jasmine',
-      'karma-chrome-launcher',
-      'karma-coverage',
-      'karma-vite'
+      require('karma-vite'),
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-coverage')
     ],
     reporters: ['progress', 'coverage'],
     coverageReporter: {
@@ -21,6 +21,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: false,
     browsers: ['ChromeHeadless'],
-    singleRun: true
+    singleRun: true,
+    restartOnFileChange: false
   });
 };

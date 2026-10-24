@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:karma": "karma start karma.conf.cjs"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
